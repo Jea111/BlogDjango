@@ -29,13 +29,44 @@
     <br />
 
     {% block content %} {% endblock %}
-    <footer>
-      <ul class="list-group d-flex">
-        <li class="list-group-item">Facebook</li>
-        <li class="list-group-item">Instagram</li>
-        <li class="list-group-item">Nuestra direccion</li>
-      </ul>
+    <footer class="bg-dark text-light mt-5 py-4">
+      <div class="container">
+        <div class="row text-center text-md-start align-items-center">
+          <div class="col-md-4 mb-3 mb-md-0">
+            <h5 class="text-success">Síguenos</h5>
+            <ul
+              class="list-unstyled d-flex justify-content-center justify-content-md-start gap-3"
+            >
+              <li>
+                <a href="#" class="text-light text-decoration-none">
+                  <i class="bi bi-facebook me-1"></i> Facebook
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-light text-decoration-none">
+                  <i class="bi bi-instagram me-1"></i> Instagram
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-4 mb-3 mb-md-0">
+            <h5 class="text-success">Contacto</h5>
+            <p class="mb-0 small">📍 Medellin, Colombia</p>
+            <p class="mb-0 small">📞 +3147681762</p>
+          </div>
+
+          <div class="col-md-4 text-center text-md-end">
+            <p class="small mb-0">&copy;2025/octubre. Librería online</p>
+          </div>
+        </div>
+      </div>
     </footer>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

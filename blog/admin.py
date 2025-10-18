@@ -18,9 +18,9 @@ class formUserItem(admin.ModelAdmin):
     
 class ItemVentas(admin.ModelAdmin):
     fields = ['usuario','producto']
-    list_display = ['usuario','fecha_venta']
-    list_filter = ['usuario','fecha_venta']
-    search_fields = ['usuario','fecha_venta']
+    list_display = ['usuario','producto','fecha_venta']
+    list_filter = ['usuario','producto','fecha_venta']
+    search_fields = ['usuario','producto','fecha_venta']
 
 admin.site.register(Blogs, BlogItem)
 admin.site.register(FormUser, formUserItem)

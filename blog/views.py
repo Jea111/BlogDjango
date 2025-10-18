@@ -10,18 +10,10 @@ def index(request):
 
 def CategoriasInput(request):
     if request.method == 'POST':
-        titu = request.POST.get('titulo')
-        aut = request.POST.get('autor')
-        porta = request.FILES.get('portada')  
-        preci = request.POST.get('precio')
-        
-
-        # if porta:
-        #     fs = FileSystemStorage()
-        #     filename = fs.save(porta.name, porta)
-        #     uploaded_file_url = fs.url(filename)
-        # else:
-        #     uploaded_file_url = None
+        titu = request.POST.get('titulo')         
+        aut = request.POST.get('autor')                  
+        porta = request.FILES.get('portada')      
+        preci = request.POST.get('precio')       
 
         Blogs.objects.create(
             titulo=titu,
@@ -31,22 +23,36 @@ def CategoriasInput(request):
         )
 
         return redirect('index') 
+    
     return render(request, 'blogs.html')
 
 
-
 def pedidosUser(request):
-    
     if request.method == 'POST':
         nomb = request.POST.get('nombre')
         direc = request.POST.get('direccion')
         met_p = request.POST.get('metodo_pago')
-        FormUser.objects.create(nombre=nomb,direccion=direc,metodo_pago=met_p)
-        # Ventas.objects.create(usuario=nomb,producto=request.user)
-        return HttpResponse('en breve te llegará un mensaje de confirmación')
-    
-   
-    return render(request,'form_user.html')
+        carrito = request.POST.get('carrito')
+
+        usuario = FormUser.objects.create(
+            nombre=nomb, direccion=direc, metodo_pago=met_p
+        )
+
+        # Crear las ventas 
+        if carrito:
+            import json
+            productos = json.loads(carrito)
+            for item in productos:
+                try:
+                    blog = Blogs.objects.get(titulo=item['nombre'])
+                    Ventas.objects.create(usuario=usuario, producto=blog)
+                except Blogs.DoesNotExist:
+                    pass 
+
+        return HttpResponse('Pedido creado correctamente')
+
+    return render(request, 'form_user.html')
+
     
     
 

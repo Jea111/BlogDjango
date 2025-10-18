@@ -10,7 +10,7 @@ class Blogs(models.Model):
     disponible= models.BooleanField(default=True)
     
     def __str__(self):
-        return f'Autor: {self.autor} - Titulo: {self.titulo} - Fecha: {self.fecha}'
+        return f'Autor: {self.autor} - Titulo: {self.titulo} - precio: {self.precio}'
     class Meta:
         verbose_name = 'Blogs'
         verbose_name_plural = 'Blogs'
