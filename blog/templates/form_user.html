@@ -1,0 +1,54 @@
+{% extends 'layout/navbar.html' %} {% load static %} {% block title %}Registrar
+Usuario{% endblock %} {% block content %}
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
+          <h3 class="text-center text-primary mb-4">Datos comprador</h3>
+
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label class="form-label text-success fw-semibold"
+                >Nombre completo</label
+              >
+              <input type="text" class="form-control" name="nombre" />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-success fw-semibold"
+                >Dirección</label
+              >
+              <input type="text" name="direccion" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-success fw-semibold"
+                >Metodo pago</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="metodo_pago"
+                placeholder="(Nequi/Bancolombia/efectivo)"
+              />
+            </div>
+
+            <div class="text-center">
+              <button
+                type="submit"
+                class="btn btn-primary px-4 py-2 rounded-pill shadow-sm"
+              >
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'layout/navbar.html' %} {% load static %} {% block title %}Registrar
+Blog{% endblock %} {% block content %}
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
+          <h3 class="text-center text-primary mb-4">Vende con nosotros</h3>
+
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label class="form-label text-success fw-semibold">Título</label>
+              <input
+                type="text"
+                class="form-control"
+                name="titulo"
+                placeholder="Escribe el título del blog"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-success fw-semibold">Portada</label>
+              <input
+                type="file"
+                name="portada"
+                id="portada"
+                accept="image/*"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="text-center">
+              <img
+                id="preview"
+                class="img-fluid rounded-3 shadow-sm mt-3"
+                style="display: none"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-success fw-semibold">Autor</label>
+              <input
+                type="text"
+                class="form-control"
+                name="autor"
+                placeholder="Nombre del autor"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-success fw-semibold">Precio</label>
+              <input
+                type="number"
+                class="form-control"
+                name="precio"
+                placeholder="precio"
+                required
+              />
+            </div>
+
+            <div class="text-center">
+              <button
+                type="submit"
+                class="btn btn-primary px-4 py-2 rounded-pill shadow-sm"
+              >
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const input = document.getElementById("portada");
+  const preview = document.getElementById("preview");
+
+  input.addEventListener("change", () => {
+    const file = input.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        preview.src = e.target.result;
+        preview.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+
+{% endblock %}

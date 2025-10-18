@@ -1,0 +1,75 @@
+{% extends 'layout/navbar.html' %} {% load static %} {% block title %}
+Blog-Tienda{% endblock %} {% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div id="carrito"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="d-flex flex-wrap justify-content-center gap-4 mb-sm-5 mt-sm-5 pt-sm-3 pb-sm-3"
+>
+  {% for b in blogs_all %}
+  <div class="card shadow-sm border-0" style="width: 20rem">
+    {% if b.disponible %}
+    <span class="badge bg-success rounded-pill d-block mx-auto"
+      >Disponible</span
+    >
+    {% else %}
+    <span class="badge bg-danger rounded-pill d-block mx-auto"
+      >No disponible</span
+    >
+    {% endif %} {% if b.portada %}
+    <img
+      src="{{ b.portada.url }}"
+      class="card-img img-fluid"
+      alt="{{ b.titulo }}"
+      style="height: 200px; object-fit: contain"
+    />
+    {% else %}
+    <img
+      src="{% static 'img/default.jpg' %}"
+      class="card-img-top img-fluid"
+      alt="Sin portada"
+      style="height: 200px; object-fit: contain"
+    />
+    {% endif %}
+
+    <div class="card-body">
+      <h4 class="card-title text-center text-uppercase text-success mb-3">
+        {{ b.titulo }}
+      </h4>
+      <p class="card-text text-center mb-2 text-capitalize text-bg-dark|">
+        <span class="badge bg-success">Autor</span><br />
+        {{ b.autor }}
+      </p>
+      <span class="rounded-pill bg-success precioProducto">{{b.precio}}</span>
+      <p class="text-muted small text-center visually-hidden">{{ b.fecha }}</p>
+
+      <div class="d-grid mt-3">
+        <button class="btn btn-success rounded-pill add_to_cart">
+          <ion-icon name="cart"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p class="text-center text-muted">No hay blogs disponibles.</p>
+  {% endfor %}
+</div>
+<script src="{% static 'js/script.js' %}"></script>
+
+<script
+  type="module"
+  src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+></script>
+<script
+  nomodule
+  src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+></script>
+{% endblock %}
