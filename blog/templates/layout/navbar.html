@@ -10,25 +10,51 @@
     />
   </head>
   <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-sm-3 mt-sm-3">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'index' %}">Libreria</a>
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'index' %}">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'agregarBlogs' %}"
-              >Vende con nosotros</a
-            >
-          </li>
-          <li class="nav-item"><a class="nav-link" href="#">Salir</a></li>
-        </ul>
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm mt-sm-3 mb-sm-3"
+    >
+      <div class="container">
+        <a class="navbar-brand fw-bold text-success" href="{% url 'index' %}"
+          >Librería</a
+        >
+
+        <!-- Botón del menú en pantallas pequeñas -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Enlaces -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto text-center">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'agregarBlogs' %}"
+                >Vende con nosotros</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-danger" href="#">Salir</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
+
     <br />
 
     {% block content %} {% endblock %}
+
     <footer class="bg-dark text-light mt-5 py-4">
       <div class="container">
         <div class="row text-center text-md-start align-items-center">
@@ -62,6 +88,7 @@
         </div>
       </div>
     </footer>
+
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"

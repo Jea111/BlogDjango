@@ -8,6 +8,35 @@ Blog-Tienda{% endblock %} {% block content %}
         <div id="carrito"></div>
       </div>
     </div>
+
+    <div class="col-md-8">
+      <div class="card p-3">
+        <form method="GET" action="{% url 'blog_search' %}">
+          <input
+            type="text"
+            name="q"
+            placeholder="Busca por título"
+            value="{{ query|default:'' }}"
+            class="form-control mb-2"
+          />
+          <button class="btn btn-success" type="submit">Buscar</button>
+        </form>
+
+        <hr />
+
+        {% if blogs_inp %} {% for s in blogs_inp %}
+        <h4>{{ s.titulo }}</h4>
+        <img
+          src="{{s.portada.url}}"
+          alt="{{s.titulo}}"
+          class="img-fluid rounded shadow-sm w-100 mb-3"
+          style="max-width: 400px; height: auto"
+        />
+        {% empty %}
+        <p>No se encontraron resultados.</p>
+        {% endfor %} {% endif %}
+      </div>
+    </div>
   </div>
 </div>
 
@@ -62,14 +91,25 @@ Blog-Tienda{% endblock %} {% block content %}
   <p class="text-center text-muted">No hay blogs disponibles.</p>
   {% endfor %}
 </div>
-<script src="{% static 'js/script.js' %}"></script>
 
 <script
   type="module"
   src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
 ></script>
+
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+/>
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.js"
+></script>
+
 <script
   nomodule
   src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
 ></script>
+<script src="{% static 'js/script.js' %}"></script>
 {% endblock %}

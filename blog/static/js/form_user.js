@@ -27,7 +27,14 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((res) => res.text())
       // Cuando llega la respuesta, mostramos mensaje y limpiamos el carrito
       .then((data) => {
-        alert("Pedido realizado con éxito "); // Muestra mensaje de confirmación
+        Toastify({
+          text: "pedido confirmado con exito",
+          duration: 8000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+        }).showToast();
         localStorage.removeItem("carritoFinal"); // Borra el carrito del navegador
         window.location.href = "/"; // Redirige al inicio de la tienda
       });

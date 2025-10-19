@@ -57,4 +57,11 @@ def pedidosUser(request):
     
 
 
+def blogSearch(request):
+    query = request.GET.get('q')  # 'q' es el nombre del input
+    blogs_search = Blogs.objects.all()
 
+    if query:  # Si el usuario escribió algo
+        blogs_search = Blogs.objects.filter(titulo__icontains=query)
+
+    return render(request, 'index.html', {'blogs_inp': blogs_search, 'query': query})
