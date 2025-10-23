@@ -52,7 +52,6 @@ def pedidosUser(request):
         return HttpResponse('Pedido creado correctamente')
 
     return render(request, 'form_user.html')
-
     
     
 

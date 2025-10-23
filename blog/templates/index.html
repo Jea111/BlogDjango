@@ -80,11 +80,22 @@ Blog-Tienda{% endblock %} {% block content %}
       <span class="rounded-pill bg-success precioProducto">{{b.precio}}</span>
       <p class="text-muted small text-center visually-hidden">{{ b.fecha }}</p>
 
+      {% if b.disponible %}
+
       <div class="d-grid mt-3">
         <button class="btn btn-success rounded-pill add_to_cart">
           <ion-icon name="cart"></ion-icon>
         </button>
       </div>
+      {% else %}
+      <div class="d-grid mt-3">
+        <button
+          class="btn btn-success rounded-pill add_to_cart visually-hidden"
+        >
+          <ion-icon name="cart"></ion-icon>
+        </button>
+      </div>
+      {% endif %}
     </div>
   </div>
   {% empty %}

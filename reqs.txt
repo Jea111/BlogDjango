@@ -1,1 +1,0 @@
-input para filtar por nombre y categorias de los libros 
