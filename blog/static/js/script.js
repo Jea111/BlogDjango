@@ -74,3 +74,23 @@ document.addEventListener("click", (e) => {
     window.location.href = "/pedidos/";
   }
 });
+
+//alerta cada que se agrega un producto
+document.addEventListener("DOMContentLoaded", () => {
+  const alertButtons = document.querySelectorAll(".alertBtn");
+
+  alertButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const nombreProducto = btn.dataset.producto || "Producto";
+
+      Toastify({
+        text: `${nombreProducto} agregado exitosamente`,
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+      }).showToast();
+    });
+  });
+});
