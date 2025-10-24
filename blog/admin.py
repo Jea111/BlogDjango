@@ -3,10 +3,10 @@ from .models import Blogs,FormUser,Ventas
 
 class BlogItem(admin.ModelAdmin):
     
-    fields  = ["titulo", "autor",'precio',"disponible"]
+    fields  = ["titulo",'portada', "autor",'precio',"disponible"]
     list_display = ["titulo", "autor",'precio',"disponible"]
     list_filter = ["autor",'precio',"disponible"]
-    search_fields  = ["titulo", "autor",'precio',"disponible"]
+    search_fields  = ["titulo","autor",'precio',"disponible"]
     
     
 class formUserItem(admin.ModelAdmin):
