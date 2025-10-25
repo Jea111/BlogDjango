@@ -1,7 +1,12 @@
 {% extends 'layout/navbar.html' %} {% load static %} {% block title %}
 Blog-Tienda {% endblock %} {% block content %}
 
-<div id="carouselExampleFade" class="carousel slide carousel-fade">
+<div
+  id="carouselExampleFade"
+  class="carousel slide carousel-fade"
+  data-aos="zoom-in-down"
+  data-aos-duration="3000"
+>
   <div class="carousel-inner" id="inicio">
     <div class="carousel-item active">
       <img
@@ -124,6 +129,8 @@ Blog-Tienda {% endblock %} {% block content %}
 <!-- PRODUCTOS DISPONIBLES -->
 <div
   class="d-flex flex-wrap justify-content-center gap-4 mb-sm-5 mt-sm-5 pt-sm-3 pb-sm-3"
+  data-aos="zoom-out-up"
+  data-aos-duration="3000"
 >
   {% for b in blogs_all %}
   <div class="card shadow-sm border-0" style="width: 20rem">
@@ -141,6 +148,8 @@ Blog-Tienda {% endblock %} {% block content %}
       class="card-img img-fluid"
       alt="{{ b.titulo }}"
       style="height: 200px; object-fit: contain"
+      data-aos="zoom-out"
+      data-aos-duration="1500"
     />
     {% else %}
     <img
