@@ -1,33 +1,16 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponse
-from django.core.files.storage import FileSystemStorage
-from .models import Blogs,FormUser,Ventas
+from .models import Blogs,FormUser,Ventas,Vendedores
 
 def index(request):
+    """muestra todos los blogs en la página principal"""
     all_blogs = Blogs.objects.all()
     return render(request, 'index.html', {'blogs_all': all_blogs})
 
 
-def CategoriasInput(request):
-    if request.method == 'POST':
-        titu = request.POST.get('titulo')         
-        aut = request.POST.get('autor')                  
-        porta = request.FILES.get('portada')      
-        preci = request.POST.get('precio')       
-
-        Blogs.objects.create(
-            titulo=titu,
-            portada=porta,  
-            autor=aut,
-            precio=preci
-        )
-
-        return redirect('index') 
-    
-    return render(request, 'blogs.html')
-
 
 def pedidosUser(request):
+    """ formulario para datos del usuario y crear ventas """
     if request.method == 'POST':
         nomb = request.POST.get('nombre')
         direc = request.POST.get('direccion')
@@ -57,6 +40,7 @@ def pedidosUser(request):
 
 
 def blogSearch(request):
+    """ búsqueda de blogs por título """
     query = request.GET.get('q')  # 'q' es el nombre del input
     blogs_search = Blogs.objects.all()
 
@@ -64,3 +48,41 @@ def blogSearch(request):
         blogs_search = Blogs.objects.filter(titulo__icontains=query)
 
     return render(request, 'index.html', {'blogs_inp': blogs_search, 'query': query})
+
+
+def vendeConNosotros(request):
+    """ formulario para que los vendedores agreguen blogs """
+    if request.method == 'POST':
+        nombre_vendedor = request.POST.get('nombre_vendedor')
+        email_vendedor = request.POST.get('email_vendedor')
+        telefono_vendedor = request.POST.get('telefono_vendedor')
+
+        titulo = request.POST.get('titulo')
+        portada = request.FILES.get('portada')
+        autor = request.POST.get('autor')
+        precio = request.POST.get('precio')
+
+        vendedor, creado = Vendedores.objects.get_or_create(
+            email_vendedor=email_vendedor,
+            defaults={
+                'nombre_vendedor': nombre_vendedor,
+                'telefono_vendedor': telefono_vendedor
+            }
+        )
+
+        Blogs.objects.create(
+            titulo=titulo,
+            portada=portada,
+            autor=autor,
+            precio=precio,
+            vendedor=vendedor
+        )
+
+        if creado:
+            mensaje = "  blog subido exitosamente."
+        else:
+            mensaje = " Blog creado y vinculado a un vendedor existente."
+
+        return HttpResponse(mensaje)
+
+    return render(request, 'blogs.html')
