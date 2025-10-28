@@ -63,16 +63,12 @@ python manage.py runserver
 
 Uso básico de la aplicación
 - Página principal (`/`): lista de productos (blogs), búsqueda por título y carrito en frontend.
+- login (login/) : login para administradores
+- ventas (ventas/) panel de administracion solo para administradpres
+
 - `agregarBlogs/`: formulario para subir un nuevo blog (título, portada, autor, precio).
 - `pedidos/`: formulario para registrar un comprador y enviar el carrito (la vista espera un JSON en el campo `carrito`).
 
 Notas importantes y recomendaciones
 
 - Versiones: hay incompatibilidades entre la versión de Django en comentarios/migraciones y la versión en `requeriments.txt`. Alinea la versión deseada y actualiza `requeriments.txt` o regenera migraciones si cambias a una versión mayor.
-
-Siguientes pasos sugeridos
-
-4. Añadir pruebas mínimas para modelos y vistas críticas.
-
----
-Archivo generado automáticamente: README básico para arrancar el proyecto.

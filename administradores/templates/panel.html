@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel Administradores</title>
+  </head>
+  <body>
+    <h2>Panel de administración</h2>
+
+    {% if mssg %}
+    <p>{{ mssg }}</p>
+    {% endif %}
+
+    <h3>Ventas:</h3>
+    {% if ventas_admin %}
+    <ul>
+      {% for venta in ventas_admin %}
+      <li>{{ venta }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No hay resultados.</p>
+    {% endif %}
+    <hr />
+
+    <h3>Vendedores</h3>
+    {% if vendedores_admin %}
+    <ul>
+      {% for vendedor in vendedores_admin %}
+      <li>{{ vendedor }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No hay resultados</p>
+    {% endif %}
+  </body>
+</html>

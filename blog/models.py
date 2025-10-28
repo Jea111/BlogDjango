@@ -47,6 +47,7 @@ class FormUser(models.Model):
 class Ventas(models.Model):
     usuario = models.ForeignKey(FormUser, on_delete=models.CASCADE)
     producto = models.ForeignKey(Blogs, on_delete=models.CASCADE)
+    total = models.DecimalField(decimal_places=2, max_digits=10,null=True, blank=True,default=5.00)
     fecha_venta = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

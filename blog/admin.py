@@ -17,7 +17,7 @@ class formUserItem(admin.ModelAdmin):
     
     
 class ItemVentas(admin.ModelAdmin):
-    fields = ['usuario','producto']
+    fields = ['usuario','producto','total']
     list_display = ['usuario','producto','fecha_venta']
     list_filter = ['usuario','producto','fecha_venta']
     search_fields = ['usuario','producto','fecha_venta']
