@@ -1,0 +1,60 @@
+{% extends "layout/navbar.html" %} {% block title %} panel vendedores-Libreria
+{% endblock %} {% block content %}
+
+<div class="container py-5">
+  <h2 class="text-center text-primary fw-bold mb-4">Panel del Vendedor</h2>
+
+  <h3 class="border-start border-4 border-primary ps-2 text-dark mb-3">
+    Blogs del vendedor
+  </h3>
+
+  {% for b in vendedor_blog %}
+
+  <div class="card mb-3 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title mb-2">{{ b.titulo }}</h5>
+      <p class="card-text mb-1">
+        <strong>Precio:</strong> {{ b.precio }} <br />
+        <strong>Fecha:</strong> {{ b.fecha }} <br />
+        {% if b.disponible %}
+        <strong>Estado:</strong>
+        <span class="badge rounded-pill bg-success">disponible</span>
+        {% else %}
+        <strong>Estado:</strong>
+        <span class="badge rounded-pill bg-danger">Vendido</span>
+        {% endif %}
+      </p>
+      <div class="text-center">
+        <img
+          src="{{ b.portada.url }}"
+          alt="Imagen del blog"
+          class="img-fluid rounded"
+          style="max-height: 300px; object-fit: cover"
+        />
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p class="text-muted">No tienes blogs registrados.</p>
+  {% endfor %}
+
+  <h3 class="border-start border-4 border-primary ps-2 text-dark mt-5 mb-3">
+    Ventas realizadas
+  </h3>
+
+  {% for v in ventas_vendedor %}
+  <div class="card mb-3 shadow-sm">
+    <div class="card-body">
+      <p class="card-text">
+        <strong>{{ v.usuario.nombre }}</strong> compró
+        <strong>{{ v.producto.titulo }}</strong> por
+        <span class="text-success fw-semibold">{{ v.total }}</span>
+      </p>
+    </div>
+  </div>
+  {% empty %}
+  <p class="text-muted">No tienes ventas registradas.</p>
+  {% endfor %}
+</div>
+
+{% endblock %}

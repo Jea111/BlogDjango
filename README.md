@@ -1,24 +1,16 @@
-# BlogDjango
+# Sistema de Gestión de Blog y Marketplace
 
-Proyecto Django sencillo que funciona como una pequeña tienda/marketplace de "blogs" (artículos/libros). Permite agregar productos con portada, mostrar catálogo, buscar por título y registrar pedidos/ventas de los usuarios.
+### Descripción del Proyecto
+Este proyecto académico implementa una plataforma web desarrollada con Django que combina funcionalidades de blog y marketplace. El sistema permite la gestión de contenido digital (blogs/artículos) con características de comercio electrónico, demostrando la aplicación práctica de conceptos avanzados de desarrollo web.
 
-Contenido
-- `blog/` - app principal con modelos, vistas, URLs y plantillas.
-- `blog_proyect/` - configuración del proyecto (settings, urls).
-- `static/` - CSS y JS usados en las plantillas.
-- `media/` - archivos subidos (portadas).
 
-Requisitos
+### Especificaciones Técnicas
+#### Requisitos del Sistema
 - Python 3.8+ (recomendado 3.10+)
-- Dependencias listadas en `requeriments.txt` 
-
-Contenido del archivo de dependencias :
-- Django
-- pillow
-- mysqlclient (si usas MySQL)
-- psycopg2 (si usas PostgreSQL)
-
-Rápida guía de instalación (Windows - PowerShell)
+- Django Framework
+- Dependencias adicionales:
+  - Pillow (procesamiento de imágenes)
+  - mysqlclient/psycopg2 (opcional, para MySQL/PostgreSQL)
 
 1) Crear y activar entorno virtual
 
@@ -61,14 +53,30 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Uso básico de la aplicación
-- Página principal (`/`): lista de productos (blogs), búsqueda por título y carrito en frontend.
-- login (login/) : login para administradores
-- ventas (ventas/) panel de administracion solo para administradpres
+### Funcionalidades Implementadas
+1. **Gestión de Contenido**
+   - Catálogo de blogs/artículos
+   - Sistema de búsqueda por título
+   - Carga de imágenes de portada
 
-- `agregarBlogs/`: formulario para subir un nuevo blog (título, portada, autor, precio).
-- `pedidos/`: formulario para registrar un comprador y enviar el carrito (la vista espera un JSON en el campo `carrito`).
+2. **Sistema de Usuarios**
+   - Panel de administración personalizado
+   - Autenticación de administradores
+   - Gestión de vendedores
 
-Notas importantes y recomendaciones
+3. **Comercio Electrónico**
+   - Carrito de compras (Frontend)
+   - Registro de pedidos
+   - Procesamiento de ventas
 
-- Versiones: hay incompatibilidades entre la versión de Django en comentarios/migraciones y la versión en `requeriments.txt`. Alinea la versión deseada y actualiza `requeriments.txt` o regenera migraciones si cambias a una versión mayor.
+### Rutas Principales
+- `/` - Página principal y catálogo
+- `/login/` - Acceso administrativo
+- `/ventas/` - Panel de control de ventas (admin)
+- `/agregarBlogs/` - Gestión de contenido
+- `/pedidos/` - Datos de pedidos de usuario(se crea la venta )
+
+### Notas
+-  mantener actualizadas las dependencias
+- Verificar compatibilidad de versiones en requirements.txt
+

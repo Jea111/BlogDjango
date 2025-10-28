@@ -1,38 +1,52 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Panel Administradores</title>
-  </head>
-  <body>
-    <h2>Panel de administración</h2>
+{% extends 'layout/navbar.html' %} {% block title %} panel Admin {% endblock %}
+{% block content %}
+<body class="bg-light">
+  <div class="container py-5">
+    <h2 class="text-center text-primary fw-bold mb-4">
+      Panel de Administración
+    </h2>
 
     {% if mssg %}
-    <p>{{ mssg }}</p>
+    <div class="alert alert-info text-center" role="alert">{{ mssg }}</div>
     {% endif %}
 
-    <h3>Ventas:</h3>
+    <h3 class="border-start border-4 border-primary ps-2 mb-3">Ventas</h3>
+
     {% if ventas_admin %}
-    <ul>
+    <div class="row row-cols-1 row-cols-md-2 g-3">
       {% for venta in ventas_admin %}
-      <li>{{ venta }}</li>
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <p class="card-text mb-0">{{ venta }}</p>
+          </div>
+        </div>
+      </div>
       {% endfor %}
-    </ul>
+    </div>
     {% else %}
-    <p>No hay resultados.</p>
+    <p class="text-muted">No hay resultados.</p>
     {% endif %}
-    <hr />
 
-    <h3>Vendedores</h3>
+    <hr class="my-5" />
+
+    <h3 class="border-start border-4 border-primary ps-2 mb-3">Vendedores</h3>
+
     {% if vendedores_admin %}
-    <ul>
+    <div class="row row-cols-1 row-cols-md-2 g-3">
       {% for vendedor in vendedores_admin %}
-      <li>{{ vendedor }}</li>
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <p class="card-text mb-0">{{ vendedor }}</p>
+          </div>
+        </div>
+      </div>
       {% endfor %}
-    </ul>
+    </div>
     {% else %}
-    <p>No hay resultados</p>
+    <p class="text-muted">No hay resultados.</p>
     {% endif %}
-  </body>
-</html>
+  </div>
+  {% endblock %}
+</body>
