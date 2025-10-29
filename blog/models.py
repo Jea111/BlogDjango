@@ -4,6 +4,7 @@ class Vendedores(models.Model):
     nombre_vendedor = models.CharField(max_length=120)
     email_vendedor = models.EmailField(max_length=254, unique=True)
     telefono_vendedor = models.CharField(max_length=20)
+    password_vendedor = models.CharField(max_length=200,null=True,blank=True)
     fecha_registro = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

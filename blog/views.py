@@ -56,6 +56,7 @@ def vendeConNosotros(request):
         nombre_vendedor = request.POST.get('nombre_vendedor')
         email_vendedor = request.POST.get('email_vendedor')
         telefono_vendedor = request.POST.get('telefono_vendedor')
+        password_vendedor = request.POST.get('password_vendedor')
 
         titulo = request.POST.get('titulo')
         portada = request.FILES.get('portada')
@@ -66,7 +67,8 @@ def vendeConNosotros(request):
             email_vendedor=email_vendedor,
             defaults={
                 'nombre_vendedor': nombre_vendedor,
-                'telefono_vendedor': telefono_vendedor
+                'telefono_vendedor': telefono_vendedor,
+                'password_vendedor':password_vendedor
             }
         )
 
