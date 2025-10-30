@@ -180,6 +180,11 @@ Blog-Tienda {% endblock %} {% block content %}
           <i class="bi bi-cart-plus"></i> Agregar al carrito
         </button>
       </div>
+      <div class="d-grid mt-3">
+        <span class="badge rounded-pill bg-info">
+          <a href="{% url 'blog_comentado' b.id %}"> Ver reseñas</a></span
+        >
+      </div>
       {% else %}
       <div class="d-grid mt-3">
         <button

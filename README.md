@@ -1,7 +1,8 @@
 # Sistema de Gestión de Blog y Marketplace
+## Proyecto Universitario de Desarrollo Web con Django
 
 ### Descripción del Proyecto
-Este proyecto académico implementa una plataforma web desarrollada con Django que combina funcionalidades de blog y marketplace. El sistema permite la gestión de contenido digital (blogs/artículos) con características de comercio electrónico, demostrando la aplicación práctica de conceptos avanzados de desarrollo web.
+Este proyecto académico implementa una plataforma web desarrollada con Django que combina funcionalidades de blog y marketplace. El sistema permite la gestión de contenido digital (blogs/artículos) con características de comercio electrónico
 
 
 ### Especificaciones Técnicas
@@ -22,13 +23,13 @@ python -m venv .venv
 2) Instalar dependencias
 
 ```powershell
-pip install -r .\requeriments.txt
+pip install -r .\requirements.txt
 ```
 
 3) Configurar la base de datos
 
 - El proyecto actualmente usa configuración MySQL en `blog_proyect/settings.py`.
-- Para desarrollo rápido puedes usar sqlite3: reemplaza `DATABASES` en `blog_proyect/settings.py` por:
+- pero se puede cambiar para desarrollo rápido : reemplazar `DATABASES` en `blog_proyect/settings.py` por:
 
 ```python
 DATABASES = {
@@ -75,8 +76,8 @@ python manage.py runserver
 - `/ventas/` - Panel de control de ventas (admin)
 - `/agregarBlogs/` - Gestión de contenido
 - `/pedidos/` - Datos de pedidos de usuario(se crea la venta )
+- `/blog_comentado/<int:id>//` - Datos de reseñas por blog y se crea la reseña
 
 ### Notas
--  mantener actualizadas las dependencias
 - Verificar compatibilidad de versiones en requirements.txt
 

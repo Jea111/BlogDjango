@@ -1,0 +1,75 @@
+{% extends "layout/navbar.html" %} {% block title %} deja tu comentario-Libreria
+{% endblock %} {% block content %}
+
+<div class="container my-5">
+  <h1 class="mb-4 text-center">Reseñas para: {{ blog.titulo }}</h1>
+
+  <div class="card shadow-sm mb-5">
+    <div class="card-body">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="nombreUsuario" class="form-label">Tu nombre</label>
+          <input
+            type="text"
+            id="nombreUsuario"
+            name="nombreUsuario"
+            class="form-control"
+            placeholder="Ingresa tu nombre"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="comentario" class="form-label">Comentario</label>
+          <textarea
+            id="comentario"
+            name="comentario"
+            class="form-control"
+            rows="3"
+            placeholder="Escribe tu comentario..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="calificacion" class="form-label"
+            >Calificación (1-5)</label
+          >
+          <input
+            type="number"
+            id="calificacion"
+            name="calificacion"
+            class="form-control w-25"
+            min="1"
+            max="5"
+            placeholder="5"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">
+          Enviar reseña
+        </button>
+      </form>
+
+      {% if mensaje %}
+      <div class="alert alert-info mt-3 text-center">{{ mensaje }}</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <h2 class="mb-3">Reseñas:</h2>
+  <ul class="list-group">
+    {% for r in reseñas %}
+    <li class="list-group-item">
+      <strong>{{ r.nombre_usuario }}</strong>
+      <span class="text-warning">({{ r.calificacion }}⭐)</span><br />
+      {{ r.comentario }}
+    </li>
+    {% empty %}
+    <li class="list-group-item text-muted">No hay reseñas todavía.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
