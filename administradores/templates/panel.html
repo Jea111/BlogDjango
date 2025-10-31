@@ -1,52 +1,101 @@
-{% extends 'layout/navbar.html' %} {% block title %} panel Admin {% endblock %}
-{% block content %}
-<body class="bg-light">
-  <div class="container py-5">
-    <h2 class="text-center text-primary fw-bold mb-4">
-      Panel de Administración
+{% extends 'layout/base-panel.html' %} {% block title %}Panel Administradores -
+Librería{% endblock %} {% block content %}
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <h2 class="fw-bold text-primary">
+      <i class="bi bi-speedometer2"></i> Panel de Administración
     </h2>
+    <p class="text-muted">Gestión general de ventas y vendedores</p>
+  </div>
 
-    {% if mssg %}
-    <div class="alert alert-info text-center" role="alert">{{ mssg }}</div>
-    {% endif %}
+  {% if mssg %}
+  <div
+    class="alert alert-info alert-dismissible fade show shadow-sm text-center"
+    role="alert"
+  >
+    <i class="bi bi-info-circle"></i> {{ mssg }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endif %}
 
-    <h3 class="border-start border-4 border-primary ps-2 mb-3">Ventas</h3>
+  <!-- Ventas -->
+  <div class="mb-5">
+    <div class="d-flex align-items-center mb-3">
+      <i class="bi bi-cart4 fs-4 text-primary me-2"></i>
+      <h3 class="border-start border-4 border-primary ps-2 mb-0">Ventas</h3>
+    </div>
 
     {% if ventas_admin %}
-    <div class="row row-cols-1 row-cols-md-2 g-3">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2">
       {% for venta in ventas_admin %}
       <div class="col">
-        <div class="card shadow-sm">
+        <div class="card border-0 shadow-sm h-100">
           <div class="card-body">
-            <p class="card-text mb-0">{{ venta }}</p>
+            <p class="card-text text-secondary">
+              <i class="bi bi-person text-success"></i>
+              <strong>Comprador:</strong> {{ venta.usuario.nombre }} <br />
+
+              <i class="bi bi-book text-info"></i>
+              <strong>Libro:</strong> {{ venta.producto.titulo }} <br />
+
+              <i class="bi bi-cash-coin text-warning"></i>
+              <strong>Total:</strong> ${{ venta.total }} <br />
+
+              <i class="bi bi-person-badge text-danger"></i>
+              <strong>Vendedor:</strong>
+              {{venta.producto.vendedor.nombre_vendedor }}
+              <br />
+
+              <i class="bi bi-calendar3 text-secondary"></i>
+              <strong>Fecha:</strong> {{ venta.fecha_venta }}
+            </p>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
     {% else %}
-    <p class="text-muted">No hay resultados.</p>
-    {% endif %}
-
-    <hr class="my-5" />
-
-    <h3 class="border-start border-4 border-primary ps-2 mb-3">Vendedores</h3>
-
-    {% if vendedores_admin %}
-    <div class="row row-cols-1 row-cols-md-2 g-3">
-      {% for vendedor in vendedores_admin %}
-      <div class="col">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <p class="card-text mb-0">{{ vendedor }}</p>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-    {% else %}
-    <p class="text-muted">No hay resultados.</p>
+    <p class="text-muted fst-italic mt-2">No hay ventas registradas.</p>
     {% endif %}
   </div>
-  {% endblock %}
-</body>
+
+  <hr class="my-5 opacity-50" />
+
+  <!--  Vendedores -->
+  <div class="mb-5">
+    <div class="d-flex align-items-center mb-3">
+      <i class="bi bi-person-badge fs-4 text-primary me-2"></i>
+      <h3 class="border-start border-4 border-primary ps-2 mb-0">Vendedores</h3>
+    </div>
+
+    {% if vendedores_admin %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2">
+      {% for vendedor in vendedores_admin %}
+      <div class="col">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <h5 class="card-title text-primary fw-semibold">
+              <i class="bi bi-person-circle"></i> {{ vendedor.nombre_vendedor }}
+            </h5>
+            <p class="card-text text-muted small mb-1">
+              <i class="bi bi-envelope"></i> {{ vendedor.email_vendedor }}
+            </p>
+            <p class="card-text text-muted small">
+              <i class="bi bi-telephone"></i> {{ vendedor.telefono_vendedor }}
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-muted fst-italic mt-2">No hay vendedores registrados.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

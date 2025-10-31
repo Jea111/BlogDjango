@@ -1,0 +1,85 @@
+{% extends "layout/base-panel.html" %} {% block title %}Editar Blog-panel
+Admin{% endblock %} {% block content %}
+<div class="card shadow-lg border-0">
+  <div class="card-header bg-success text-white">
+    <h4 class="mb-0">
+      <i class="bi bi-pencil-square"></i> Actualización del Blog
+    </h4>
+  </div>
+
+  <div class="card-body bg-white">
+    <form
+      action="{% url 'editar_blog' blog.id %}"
+      method="post"
+      enctype="multipart/form-data"
+      class="row g-3"
+    >
+      {% csrf_token %}
+
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Título del Blog</label>
+        <input
+          type="text"
+          class="form-control"
+          name="titulo"
+          value="{{ blog.titulo }}"
+          required
+        />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Autor</label>
+        <input
+          type="text"
+          class="form-control"
+          name="autor"
+          value="{{ blog.autor }}"
+          required
+        />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Precio</label>
+        <input
+          type="number"
+          step="0.01"
+          class="form-control"
+          name="precio"
+          value="{{ blog.precio }}"
+          required
+        />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Portada actual</label><br />
+        {% if blog.portada %}
+        <img
+          src="{{ blog.portada.url }}"
+          alt="Portada"
+          class="img-thumbnail mb-2"
+          style="max-width: 150px"
+        />
+        {% else %}
+        <p class="text-muted">No hay portada</p>
+        {% endif %}
+        <label class="form-label fw-semibold mt-2"
+          >Nueva portada (opcional)</label
+        >
+        <input type="file" class="form-control" name="portada" />
+      </div>
+
+      <div class="col-12 text-center mt-4">
+        <button type="submit" class="btn btn-success px-5 py-2 shadow-sm">
+          <i class="bi bi-upload"></i> Actualizar Blog
+        </button>
+        <a
+          href="{% url 'panel_vendedores' %}"
+          class="btn btn-secondary ms-2 px-4"
+        >
+          <i class="bi bi-arrow-left-circle"></i> Volver
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
