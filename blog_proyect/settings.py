@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-sva2mycif-9gcxz=*n*47y0qr#c87cy*2&(8xgfxjg*l%f_a$2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app','localhost','127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'blog_proyect.urls'
@@ -77,23 +77,17 @@ WSGI_APPLICATION = 'blog_proyect.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'blogdjango',
-#         'PORT':'3306',
-#         'USER':'root',
-#         'HOST':'127.0.0.1',
-#         'PASSWORD':''
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'blogdjango',
+        'PORT':'3306',
+        'USER':'root',
+        'HOST':'127.0.0.1',
+        'PASSWORD':''
     }
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -141,4 +135,4 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

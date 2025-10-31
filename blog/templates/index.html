@@ -84,48 +84,6 @@ Blog-Tienda {% endblock %} {% block content %}
   <div class="row">
     <div class="col-md-4 mt-4 mb-4 g-4 p-4"></div>
 
-    <!-- 🔍 BUSCADOR  -->
-    <div class="col-md-8 mt-4 mb-4 g-4 p-4">
-      <div class="card p-3">
-        <form method="GET" action="{% url 'blog_search' %}" class="mt-2">
-          <div class="input-group">
-            <span class="input-group-text bg-success text-white">
-              <i class="bi bi-search"></i>
-            </span>
-            <input
-              type="text"
-              name="q"
-              placeholder="Busca por título..."
-              value="{{ query|default:'' }}"
-              class="form-control border-success"
-            />
-            <button class="btn btn-success" type="submit">Buscar</button>
-          </div>
-        </form>
-
-        <hr />
-
-        {% if blogs_inp %} {% for s in blogs_inp %}
-        <h4>{{ s.titulo }}</h4>
-        <img
-          src="{{ s.portada.url }}"
-          alt="{{ s.titulo }}"
-          class="img-fluid rounded shadow-sm w-100 mb-3"
-          style="max-width: 400px; height: auto"
-        />
-        <div class="d-grid mt-3">
-          <button class="btn btn-outline-success w-100 add_to_cart">
-            <i class="bi bi-cart-plus"></i> Agregar al carrito
-          </button>
-        </div>
-        {% empty %}
-        <p>No se encontraron resultados.</p>
-        {% endfor %} {% endif %}
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- PRODUCTOS DISPONIBLES -->
 <div
   class="d-flex flex-wrap justify-content-center gap-4 mb-sm-5 mt-sm-5 pt-sm-3 pb-sm-3"
@@ -241,74 +199,47 @@ Blog-Tienda {% endblock %} {% block content %}
           <h3 class="text-center text-success mb-4 text-uppercase fw-bold">
             Calificaciones
           </h3>
-          <hr class="mb-4" />
-          <ul class="list-unstyled">
-            <li class="mb-4">
-              <div class="d-flex align-items-center">
-                <div class="flex-shrink-0">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png"
-                    alt="Usuario"
-                    class="rounded-circle shadow-sm"
-                    width="50"
-                    height="50"
-                  />
-                </div>
-                <div class="ms-3">
-                  <h6 class="mb-1 fw-bold text-dark">Jehan Cortes</h6>
-                  <div class="text-warning">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                  </div>
-                  <p class="mb-0 text-muted small fst-italic">
-                    “Excelente servicio, los libros llegaron en perfecto
-                    estado.”
-                  </p>
-                </div>
-              </div>
-            </li>
+          
+<!-- reseñas  -->
 
-            <li class="mb-4">
-              <div class="d-flex align-items-center">
-                <div class="flex-shrink-0">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
-                    alt="Usuario"
-                    class="rounded-circle shadow-sm"
-                    width="50"
-                    height="50"
-                  />
-                </div>
-                <div class="ms-3">
-                  <h6 class="mb-1 fw-bold text-dark">Aldayr Cortes</h6>
-                  <div class="text-warning">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star"></i>
-                  </div>
-                  <p class="mb-0 text-muted small fst-italic">
-                    “Muy buena experiencia, volveré a comprar pronto.”
-                  </p>
-                </div>
+
+ {% if mensaje %}
+  <div class="alert alert-warning text-center">{{ mensaje }}</div>
+  {% endif %}
+
+  <h3 class="mt-4 mb-3">Últimas reseñas</h3>
+  <ul class="list-group">
+    {% for r in reseñas %}
+    <li class="list-group-item">
+      <strong>{{ r.usuario.nombre }}</strong>
+      <span class="text-warning">({{ r.calificacion_tienda }}⭐)</span><br />
+      {{ r.comentario_tienda }}
+      <div class="text-muted small">{{ r.created_at|date:"d/m/Y H:i" }}</div>
+    </li>
+    {% empty %}
+    <li class="list-group-item text-muted">Aún no hay reseñas.</li>
+    {% endfor %}
+  </ul>
+</div>
+
+               
               </div>
             </li>
           </ul>
 
-          <div class="text-center mt-3">
-            <a href="#" class="btn btn-outline-success btn-sm rounded-pill">
-              Ver más opiniones
-            </a>
-          </div>
+          
+         
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
+
 
 <script
   type="module"
