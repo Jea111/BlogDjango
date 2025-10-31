@@ -52,12 +52,6 @@ Blog-Tienda {% endblock %} {% block content %}
     data-bs-target="#offcanvasCart"
   >
     <i class="bi bi-cart3"></i> Carrito
-    <!-- <span
-      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-      id="cart-count"
-    >
-      0
-    </span> -->
   </button>
 </div>
 
@@ -84,163 +78,159 @@ Blog-Tienda {% endblock %} {% block content %}
   <div class="row">
     <div class="col-md-4 mt-4 mb-4 g-4 p-4"></div>
 
-<!-- PRODUCTOS DISPONIBLES -->
-<div
-  class="d-flex flex-wrap justify-content-center gap-4 mb-sm-5 mt-sm-5 pt-sm-3 pb-sm-3"
-  data-aos="zoom-out-up"
-  data-aos-duration="3000"
->
-  {% for b in blogs_all %}
-  <div class="card shadow-sm border-0" style="width: 20rem">
-    {% if b.disponible %}
-    <span class="badge bg-success rounded-pill d-block mx-auto"
-      >Disponible</span
+    <div
+      class="d-flex flex-wrap justify-content-center gap-4 mb-sm-5 mt-sm-5 pt-sm-3 pb-sm-3"
+      data-aos="zoom-out-up"
+      data-aos-duration="3000"
     >
-    {% else %}
-    <span class="badge bg-danger rounded-pill d-block mx-auto"
-      >No disponible</span
-    >
-    {% endif %} {% if b.portada %}
-    <img
-      src="{{ b.portada.url }}"
-      class="card-img img-fluid"
-      alt="{{ b.titulo }}"
-      style="height: 200px; object-fit: contain"
-      data-aos="zoom-out"
-      data-aos-duration="1500"
-    />
-    {% else %}
-    <img
-      src="{% static 'img/default.jpg' %}"
-      class="card-img-top img-fluid"
-      alt="Sin portada"
-      style="height: 200px; object-fit: contain"
-    />
-    {% endif %}
-
-    <div class="card-body">
-      <h4 class="card-title text-center text-uppercase text-success mb-3">
-        {{ b.titulo }}
-      </h4>
-      <p class="card-text text-center mb-2 text-capitalize text-bg-dark|">
-        <span class="badge bg-success">Autor</span><br />
-        {{ b.autor }}
-      </p>
-      <span class="text-muted text-end precioProducto">{{ b.precio }}</span>
-      <p class="text-muted small text-center visually-hidden">{{ b.fecha }}</p>
-
-      {% if b.disponible %}
-      <div class="d-grid mt-3">
-        <button
-          class="btn btn-outline-success w-100 add_to_cart alertBtn"
-          data-producto="{{ b.titulo }}"
+      {% for b in blogs_all %}
+      <div class="card shadow-sm border-0" style="width: 20rem">
+        {% if b.disponible %}
+        <span class="badge bg-success rounded-pill d-block mx-auto"
+          >Disponible</span
         >
-          <i class="bi bi-cart-plus"></i> Agregar al carrito
-        </button>
-      </div>
-      <div class="d-grid mt-3">
-        <span class="badge rounded-pill bg-info">
-          <a href="{% url 'blog_comentado' b.id %}"> Ver reseñas</a></span
+        {% else %}
+        <span class="badge bg-danger rounded-pill d-block mx-auto"
+          >No disponible</span
         >
-      </div>
-      {% else %}
-      <div class="d-grid mt-3">
-        <button
-          class="btn btn-success rounded-pill add_to_cart visually-hidden"
-        >
-          <ion-icon name="cart"></ion-icon>
-        </button>
-      </div>
-      {% endif %}
-    </div>
-  </div>
-  {% empty %}
-  <p class="text-center text-muted">No hay blogs disponibles.</p>
-  {% endfor %}
-</div>
-
-<!-- SOBRE NOSOTROS Y CALIFICACIONES -->
-<div class="container my-5">
-  <div class="row g-4 align-items-center">
-    <div class="col-lg-4" id="abouh">
-      <div class="card shadow-lg border-0 rounded-4">
-        <div class="card-body p-4">
-          <h3 class="text-center text-success mb-4 text-uppercase fw-bold">
-            Sobre Nosotros
-          </h3>
-          <hr />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla dolor
-            asperiores molestias facere, esse, aspernatur dicta nesciunt illo
-            ullam nostrum veritatis nobis nisi odio iste natus voluptates.
-            Aliquid, totam voluptates?
+        {% endif %} {% if b.portada %}
+        <img
+          src="{{ b.portada.url }}"
+          class="card-img img-fluid"
+          alt="{{ b.titulo }}"
+          style="height: 200px; object-fit: contain"
+          data-aos="zoom-out"
+          data-aos-duration="1500"
+        />
+        {% else %}
+        <img
+          src="{% static 'img/default.jpg' %}"
+          class="card-img-top img-fluid"
+          alt="Sin portada"
+          style="height: 200px; object-fit: contain"
+        />
+        {% endif %}
+        <div class="card-body">
+          <h4 class="card-title text-center text-uppercase text-success mb-3">
+            {{ b.titulo }}
+          </h4>
+          <p class="card-text text-center mb-2 text-capitalize text-bg-dark|">
+            <span class="badge bg-success">Autor</span><br />
+            {{ b.autor }}
           </p>
+          <span class="text-muted text-end precioProducto">{{ b.precio }}</span>
+          <p class="text-muted small text-center visually-hidden">
+            {{ b.fecha }}
+          </p>
+          {% if b.disponible %}
+          <div class="d-grid mt-3">
+            <button
+              class="btn btn-outline-success w-100 add_to_cart alertBtn"
+              data-producto="{{ b.titulo }}"
+            >
+              <i class="bi bi-cart-plus"></i> Agregar al carrito
+            </button>
+          </div>
+          <div class="d-grid mt-3">
+            <a
+              href="{% url 'blog_comentado' b.id %}"
+              class="btn btn-outline-info btn-sm rounded-pill fw-semibold"
+            >
+              <i class="bi bi-chat-dots me-1"></i> Ver reseñas
+            </a>
+          </div>
+          {% else %}
+          <div class="d-grid mt-3">
+            <button
+              class="btn btn-success rounded-pill add_to_cart visually-hidden"
+            >
+              <ion-icon name="cart"></ion-icon>
+            </button>
+          </div>
+          {% endif %}
         </div>
       </div>
+      {% empty %}
+      <p class="text-center text-muted">No hay blogs disponibles.</p>
+      {% endfor %}
     </div>
 
-    <div class="col-lg-4">
-      <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.1220957127575!2d-75.56839022592084!3d6.247637593740738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4429d444104df7%3A0x591da3490ca09224!2sLa%20Librer%C3%ADa!5e0!3m2!1sen!2sco!4v1761242506672!5m2!1sen!2sco"
-          width="100%"
-          height="350"
-          style="border: 0"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
-    </div>
+    <div class="container my-5">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-4" id="abouh">
+          <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-4">
+              <h3 class="text-center text-success mb-4 text-uppercase fw-bold">
+                Sobre Nosotros
+              </h3>
+              <hr />
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
+                dolor asperiores molestias facere, esse, aspernatur dicta
+                nesciunt illo ullam nostrum veritatis nobis nisi odio iste natus
+                voluptates. Aliquid, totam voluptates?
+              </p>
+            </div>
+          </div>
+        </div>
 
-    <div class="col-lg-4" id="calificaciones">
-      <div class="card shadow-lg border-0 rounded-4">
-        <div class="card-body p-4">
-          <h3 class="text-center text-success mb-4 text-uppercase fw-bold">
-            Calificaciones
-          </h3>
-          
-<!-- reseñas  -->
+        <div class="col-lg-4">
+          <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.1220957127575!2d-75.56839022592084!3d6.247637593740738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4429d444104df7%3A0x591da3490ca09224!2sLa%20Librer%C3%ADa!5e0!3m2!1sen!2sco!4v1761242506672!5m2!1sen!2sco"
+              width="100%"
+              height="350"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
 
-
- {% if mensaje %}
-  <div class="alert alert-warning text-center">{{ mensaje }}</div>
-  {% endif %}
-
-  <h3 class="mt-4 mb-3">Últimas reseñas</h3>
-  <ul class="list-group">
-    {% for r in reseñas %}
-    <li class="list-group-item">
-      <strong>{{ r.usuario.nombre }}</strong>
-      <span class="text-warning">({{ r.calificacion_tienda }}⭐)</span><br />
-      {{ r.comentario_tienda }}
-      <div class="text-muted small">{{ r.created_at|date:"d/m/Y H:i" }}</div>
-    </li>
-    {% empty %}
-    <li class="list-group-item text-muted">Aún no hay reseñas.</li>
-    {% endfor %}
-  </ul>
-</div>
-
-               
+        <div class="col-lg-4" id="calificaciones">
+          <div class="card shadow-lg border-0 rounded-4 h-100">
+            <div class="card-body p-4">
+              {% if mensaje %}
+              <div class="alert alert-warning text-center py-2 mb-3">
+                {{ mensaje }}
               </div>
-            </li>
-          </ul>
-
-          
-         
+              {% endif %}
+              <h5 class="text-muted mb-3 text-center">
+                <i class="bi bi-chat-left-text text-success"></i> Últimas
+                reseñas
+              </h5>
+              <ul class="list-group list-group-flush">
+                {% for r in reseñas %}
+                <li class="list-group-item border-0 border-bottom">
+                  <div>
+                    <strong class="text-success">{{ r.usuario.nombre }}</strong>
+                    <div class="text-warning small">
+                      <strong>{{r.calificacion_tienda}}</strong>
+                      <i class="bi bi-star"></i>
+                    </div>
+                    <p class="mb-1 mt-2 text-secondary">
+                      {{ r.comentario_tienda }}
+                    </p>
+                    <small class="text-muted d-block">
+                      <i class="bi bi-calendar3"></i>
+                      {{ r.created_at|date:"d/m/Y H:i" }}
+                    </small>
+                  </div>
+                </li>
+                {% empty %}
+                <li class="list-group-item text-center text-muted">
+                  Aún no hay reseñas.
+                </li>
+              </ul>
+              {% endfor %}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
 <script
   type="module"
   src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -259,5 +249,4 @@ Blog-Tienda {% endblock %} {% block content %}
   src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
 ></script>
 <script src="{% static 'js/script.js' %}"></script>
-
 {% endblock %}

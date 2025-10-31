@@ -40,8 +40,8 @@ def reseñas_tienda(request):
         if not usuario and nombre_usuario:
             usuario = FormUser.objects.create(
                 nombre=nombre_usuario,
-                direccion='',
-                metodo_pago=''
+                direccion='medellin',
+                metodo_pago='efectivo'
             )
 
         if not usuario:
