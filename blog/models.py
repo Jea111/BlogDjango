@@ -25,7 +25,7 @@ class Blogs(models.Model):
     vendedor = models.ForeignKey(Vendedores, on_delete=models.SET_NULL, related_name='blogs', null=True, blank=True)
 
     def __str__(self):
-        return f'Autor: {self.autor} - Título: {self.titulo} - Precio: {self.precio}'
+        return f'Título: {self.titulo} - Precio: {self.precio}'
 
     class Meta:
         verbose_name = 'Blog'
@@ -52,7 +52,7 @@ class Ventas(models.Model):
     fecha_venta = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Usuario: {self.usuario.nombre} - Producto: {self.producto.titulo} '
+        return f'Usuario: {self.usuario.nombre} - Producto: {self.producto.titulo}-TOtal: {self.total}' 
 
     class Meta:
         verbose_name = 'Venta'

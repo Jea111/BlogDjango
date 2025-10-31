@@ -1,11 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Blogs,FormUser,Ventas,Vendedores
-
+from reseñas.models import ReseñaTienda
+from reseñas.views import reseñas_tienda
 def index(request):
-    """muestra todos los blogs en la página principal"""
+    """muestra todos los blogs y reseñas en la página principal"""
     all_blogs = Blogs.objects.all()
-    return render(request, 'index.html', {'blogs_all': all_blogs})
+    reseñas = ReseñaTienda.objects.all().order_by('-created_at')
+    return render(request, 'index.html', {
+        'blogs_all': all_blogs,
+        'reseñas': reseñas
+    })
 
 
 
@@ -25,12 +30,32 @@ def pedidosUser(request):
         if carrito:
             import json
             productos = json.loads(carrito)
+            # Calcular totales y crear una entrada de venta por cada producto
+            from decimal import Decimal, InvalidOperation
+
             for item in productos:
                 try:
-                    blog = Blogs.objects.get(titulo=item['nombre'])
-                    Ventas.objects.create(usuario=usuario, producto=blog)
+                    blog = Blogs.objects.get(titulo=item.get('nombre'))
                 except Blogs.DoesNotExist:
-                    pass 
+                    continue
+
+                item_total = None
+                if item.get('total') is not None:
+                    try:
+                        item_total = Decimal(str(item.get('total')))
+                    except (InvalidOperation, TypeError):
+                        item_total = None
+
+                if item_total is None:
+                    try:
+                        precio = Decimal(str(item.get('precio', 0)))
+                        cantidad = int(item.get('cantidad', 1) or 1)
+                        item_total = precio * cantidad
+                    except (InvalidOperation, TypeError, ValueError):
+                        item_total = Decimal('0.00')
+
+                # Crear la venta asignando el total por producto
+                Ventas.objects.create(usuario=usuario, producto=blog, total=item_total)
 
         return HttpResponse('Pedido creado correctamente')
 
@@ -39,15 +64,15 @@ def pedidosUser(request):
     
 
 
-def blogSearch(request):
-    """ búsqueda de blogs por título """
-    query = request.GET.get('q')  # 'q' es el nombre del input
-    blogs_search = Blogs.objects.all()
+# def blogSearch(request):
+#     """ búsqueda de blogs por título """
+#     query = request.GET.get('q')  # 'q' es el nombre del input
+#     blogs_search = Blogs.objects.all()
 
-    if query:  # Si el usuario escribió algo
-        blogs_search = Blogs.objects.filter(titulo__icontains=query)
+#     if query:  # Si el usuario escribió algo
+#         blogs_search = Blogs.objects.filter(titulo__icontains=query)
 
-    return render(request, 'index.html', {'blogs_inp': blogs_search, 'query': query})
+#     return render(request, 'index.html', {'blogs_inp': blogs_search, 'query': query})
 
 
 def vendeConNosotros(request):
@@ -88,3 +113,8 @@ def vendeConNosotros(request):
         return HttpResponse(mensaje)
 
     return render(request, 'blogs.html')
+
+def Reseñas(request):
+    res = reseñas_tienda()
+    
+    return render (request,'index.html',res)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ReseñaBlog
+from .models import ReseñaBlog,ReseñaTienda
 
 # Register your models here.
 
@@ -10,3 +10,8 @@ class ReseñaBlogAdmin(admin.ModelAdmin):
     search_fields = ('nombre_usuario', 'comentario')
     list_filter = ('calificacion', 'blog_comentado')
 
+@admin.register(ReseñaTienda)
+class ReseñaTiendaAdmin(admin.ModelAdmin):
+    list_display = ('usuario', 'comentario_tienda', 'calificacion_tienda', 'created_at')
+    search_fields = ('usuario', 'comentario_tienda')
+    list_filter = ('comentario_tienda', 'calificacion_tienda')
