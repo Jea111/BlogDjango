@@ -102,12 +102,6 @@ def eliminar_blog_vendedor(request, id):
         vendedor_id = request.session.get('vendedor_id')
         if vendedor_id:
             request.user = get_object_or_404(Vendedores, id=vendedor_id)
-
-    
-    
-    
-    
-    
     
     blog_eliminar = get_object_or_404(Blogs, id=id)
 
@@ -165,3 +159,14 @@ def editar_blog_vendedor(request, id):
         'blog': blog_editar
     }
     return render(request, 'actualizar_blog.html', context)
+
+
+
+
+def eliminar_vendedor_admin(request, id):
+    vendedor = get_object_or_404(Vendedores, id=id)
+    if vendedor:
+        vendedor.delete()
+        return redirect('ventas') 
+    
+    return render(request, 'login.html')
