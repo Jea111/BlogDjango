@@ -8,7 +8,7 @@ Blog-Tienda {% endblock %} {% block content %}
   data-aos-duration="3000"
 >
   <div class="carousel-inner" id="inicio">
-    <div class="carousel-item active">
+    <div class="carousel-item active position-relative">
       <img
         src="/media/media/hero-img.webp"
         class="d-block w-100"
@@ -16,15 +16,26 @@ Blog-Tienda {% endblock %} {% block content %}
         style="max-height: 500px; object-fit: cover"
       />
     </div>
+
     <div class="carousel-item">
       <img
         src="/media/media/portada-gabo.jfif"
         class="d-block w-100"
-        alt=""
+        alt="Portada Gabriel García Márquez"
         style="max-height: 500px; object-fit: contain"
       />
+      <div
+        class="position-absolute top-50 start-50 translate-middle text-center text-white p-4"
+        style="background: rgba(0, 0, 0, 0.4); border-radius: 10px"
+      >
+        <h1 class="fw-bold display-6">Libreria</h1>
+        <p class="lead mb-0">
+          Un espacio para descubrir, aprender y dejar volar tu imaginación.
+        </p>
+      </div>
     </div>
   </div>
+
   <button
     class="carousel-control-prev"
     type="button"
@@ -32,7 +43,7 @@ Blog-Tienda {% endblock %} {% block content %}
     data-bs-slide="prev"
   >
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
+    <span class="visually-hidden">Anterior</span>
   </button>
   <button
     class="carousel-control-next"
@@ -41,7 +52,7 @@ Blog-Tienda {% endblock %} {% block content %}
     data-bs-slide="next"
   >
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
+    <span class="visually-hidden">Siguiente</span>
   </button>
 </div>
 
@@ -223,7 +234,17 @@ Blog-Tienda {% endblock %} {% block content %}
                   Aún no hay reseñas.
                 </li>
               </ul>
+
               {% endfor %}
+
+              <div class="d-grid mt-3">
+                <a
+                  href="{% url 'reseñas_tienda'  %}"
+                  class="btn btn-outline-info btn-sm rounded-pill fw-semibold"
+                >
+                  <i class="bi bi-chat-dots me-1"></i> dejar reseña
+                </a>
+              </div>
             </div>
           </div>
         </div>

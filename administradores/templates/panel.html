@@ -23,6 +23,8 @@ Librería{% endblock %} {% block content %}
   </div>
   {% endif %}
 
+  <br />
+
   <!-- Ventas -->
   <div class="mb-5">
     <div class="d-flex align-items-center mb-3">
@@ -34,44 +36,53 @@ Librería{% endblock %} {% block content %}
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2">
       {% for venta in ventas_admin %}
       <div class="col">
-        <div class="card border-0 shadow-sm h-100">
+        <div class="card border-0 shadow-sm h-100 hover-shadow">
+          <div class="card-header bg-primary bg-opacity-10 border-0">
+            <h5 class="card-title mb-0 text-primary">
+              <i class="bi bi-receipt-cutoff"></i> Venta #{{ forloop.counter }}
+            </h5>
+          </div>
+
           <div class="card-body">
-            <h5>Datos del comprador</h5>
-            <p class="card-text text-secondary">
-              
-              <i class="bi bi-person text-success"></i>
-              
+            <h6 class="fw-semibold text-dark mb-2">
+              <i class="bi bi-person text-success"></i> Datos del comprador
+            </h6>
 
-              <strong>Comprador:</strong> {{ venta.usuario.nombre }} <br />
+            <ul class="list-unstyled small mb-3">
+              <li><strong>Nombre:</strong> {{ venta.usuario.nombre }}</li>
+              <li>
+                <i class="bi bi-geo-alt text-success"></i>
+                <strong>Dirección:</strong> {{ venta.usuario.direccion }}
+              </li>
+              <li>
+                <i class="bi bi-credit-card-fill text-success"></i>
+                <strong>Método de pago:</strong> {{ venta.usuario.metodo_pago }}
+              </li>
+            </ul>
 
-              <i class="bi bi-geo-alt text-success"></i>
-              <strong>Comprador Direccion: </strong>
+            <div class="border-top border-2 border-light my-3"></div>
 
-              {{ venta.usuario.direccion }}<br />
+            <h6 class="fw-semibold text-dark mb-2">
+              <i class="bi bi-book text-info"></i> Datos del producto
+            </h6>
 
-              <i class="bi bi-credit-card-fill text-success"></i>
-              <strong>metodo pago comprador:</strong>
-
-              {{ venta.usuario.metodo_pago }} <br />
-
-              <hr class="my-5 opacity-50" />
-
-              <h5>Datos del producto</h5>
-
-              <i class="bi bi-book text-info"></i>
-              <strong>Libro:</strong> {{ venta.producto.titulo }} <br />
-
-              <i class="bi bi-cash-coin text-warning"></i>
-              <strong>Total:</strong> ${{ venta.total }} <br />
-
-              <i class="bi bi-person-badge text-danger"></i>
-              <strong>Vendedor:</strong>
-              {{venta.producto.vendedor.nombre_vendedor }}
-              <br />
-
-              <i class="bi bi-calendar3 text-secondary"></i>
-              <strong>Fecha:</strong> {{ venta.fecha_venta }}
-            </p>
+            <ul class="list-unstyled small">
+              <li><strong>Libro:</strong> {{ venta.producto.titulo }}</li>
+              <li>
+                <i class="bi bi-cash-coin text-warning"></i>
+                <strong>Total:</strong>
+                <span class="text-success fw-semibold">${{ venta.total }}</span>
+              </li>
+              <li>
+                <i class="bi bi-person-badge text-danger"></i>
+                <strong>Vendedor:</strong>
+                {{ venta.producto.vendedor.nombre_vendedor }}
+              </li>
+              <li>
+                <i class="bi bi-calendar3 text-secondary"></i>
+                <strong>Fecha:</strong> {{ venta.fecha_venta }}
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -84,10 +95,18 @@ Librería{% endblock %} {% block content %}
 
   <hr class="my-5 opacity-50" />
 
-  <!--  Vendedores -->
+  <!-- Vendedores -->
   <div class="mb-5">
+    <a
+      href="{% url 'agregarBlogs' %}"
+      class="btn btn-success border-1 badge rounded-pill text-decoration-none"
+    >
+      New Vendedor
+    </a>
+
     <div class="d-flex align-items-center mb-3">
       <i class="bi bi-person-badge fs-4 text-primary me-2"></i>
+
       <h3 class="border-start border-4 border-primary ps-2 mb-0">Vendedores</h3>
     </div>
 
@@ -95,17 +114,26 @@ Librería{% endblock %} {% block content %}
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2">
       {% for vendedor in vendedores_admin %}
       <div class="col">
-        <div class="card border-0 shadow-sm h-100">
-          <div class="card-body">
-            <h5 class="card-title text-primary fw-semibold">
-              <i class="bi bi-person-circle"></i> {{ vendedor.nombre_vendedor }}
+        <div class="card border-0 shadow-sm h-100 hover-shadow">
+          <div class="card-body text-center">
+            <div class="mb-3">
+              <i class="bi bi-person-circle fs-1 text-primary"></i>
+            </div>
+            <h5 class="card-title text-primary fw-semibold mb-1">
+              {{ vendedor.nombre_vendedor }}
             </h5>
             <p class="card-text text-muted small mb-1">
               <i class="bi bi-envelope"></i> {{ vendedor.email_vendedor }}
             </p>
-            <p class="card-text text-muted small">
+            <p class="card-text text-muted small mb-0">
               <i class="bi bi-telephone"></i> {{ vendedor.telefono_vendedor }}
             </p>
+
+            <a
+              href="{% url 'eliminar_vendedor' vendedor.id %}"
+              class="btn btn-danger badge rounded-pill text-decoration-none list-unstyled"
+              >Eliminar</a
+            >
           </div>
         </div>
       </div>

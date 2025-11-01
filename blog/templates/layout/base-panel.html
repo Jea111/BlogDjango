@@ -18,7 +18,9 @@
   </head>
 
   <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm fixed-top"
+    >
       <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="{% url 'ventas' %}">
           <i class="bi bi-speedometer2"></i> Panel Admin
@@ -45,7 +47,7 @@
 
             <li class="nav-item">
               <a class="nav-link" href="{% url 'panel_vendedores' %}">
-                <i class="bi bi-people"></i> Panel de vendedores
+                <i class="bi bi-people"></i> Administradores
               </a>
             </li>
             <li class="nav-item">
