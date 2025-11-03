@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Blogs,FormUser,Ventas,Vendedores
 from reseñas.models import ReseñaTienda
@@ -106,11 +106,10 @@ def vendeConNosotros(request):
         )
 
         if creado:
-            mensaje = "  blog subido exitosamente."
+            return redirect('index')
         else:
-            mensaje = " Blog creado y vinculado a un vendedor existente."
+            return render(request,'index.html')
 
-        return HttpResponse(mensaje)
 
     return render(request, 'blogs.html')
 
