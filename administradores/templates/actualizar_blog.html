@@ -39,6 +39,17 @@ Admin{% endblock %} {% block content %}
       </div>
 
       <div class="col-md-6">
+        <label class="form-label fw-semibold">descripción del blog</label>
+        <input
+          type="text"
+          class="form-control"
+          name="detalle"
+          value="{{ blog.detalle }}"
+          required
+        />
+      </div>
+
+      <div class="col-md-6">
         <label class="form-label fw-semibold">Precio</label>
         <input
           type="number"

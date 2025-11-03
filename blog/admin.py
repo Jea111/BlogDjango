@@ -3,7 +3,7 @@ from .models import Blogs,FormUser,Ventas,Vendedores
 
 class BlogItem(admin.ModelAdmin):
     
-    fields  = ["titulo",'portada', "autor",'precio',"disponible","vendedor"]
+    fields  = ["titulo",'portada', "autor",'detalle','precio',"disponible","vendedor"]
     list_display = ["titulo", "autor",'precio',"disponible","vendedor","fecha"]
     list_filter = ["autor",'precio',"disponible","vendedor"]
     search_fields  = ["titulo","autor",'precio',"disponible","vendedor"]

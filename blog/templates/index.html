@@ -1,6 +1,24 @@
 {% extends 'layout/navbar.html' %} {% load static %} {% block title %}
 Blog-Tienda {% endblock %} {% block content %}
 
+<style>
+  .position-relative:hover .opacity-0 {
+    opacity: 1 !important;
+  }
+
+  #btnCarrito {
+    z-index: 1050;
+  }
+
+  @media (max-width: 768px) {
+    #btnCarrito {
+      bottom: 1rem;
+      right: 1rem;
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>
 <div
   id="carouselExampleFade"
   class="carousel slide carousel-fade"
@@ -56,15 +74,15 @@ Blog-Tienda {% endblock %} {% block content %}
   </button>
 </div>
 
-<div class="container mt-4 text-end">
-  <button
-    class="btn btn-outline-success position-relative"
-    data-bs-toggle="offcanvas"
-    data-bs-target="#offcanvasCart"
-  >
-    <i class="bi bi-cart3"></i> Carrito
-  </button>
-</div>
+<button
+  id="btnCarrito"
+  class="btn btn-success position-fixed bottom-0 end-0 m-4 shadow-lg"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#offcanvasCart"
+  style="z-index: 1050"
+>
+  <i class="bi bi-cart3 fs-5"></i> Carrito
+</button>
 
 <div
   class="offcanvas offcanvas-end"
@@ -95,7 +113,10 @@ Blog-Tienda {% endblock %} {% block content %}
       data-aos-duration="3000"
     >
       {% for b in blogs_all %}
-      <div class="card shadow-sm border-0" style="width: 20rem">
+      <div
+        class="card shadow-sm border-0 position-relative overflow-hidden"
+        style="width: 20rem"
+      >
         {% if b.disponible %}
         <span class="badge bg-success rounded-pill d-block mx-auto"
           >Disponible</span
@@ -104,23 +125,33 @@ Blog-Tienda {% endblock %} {% block content %}
         <span class="badge bg-danger rounded-pill d-block mx-auto"
           >No disponible</span
         >
-        {% endif %} {% if b.portada %}
-        <img
-          src="{{ b.portada.url }}"
-          class="card-img img-fluid"
-          alt="{{ b.titulo }}"
-          style="height: 200px; object-fit: contain"
-          data-aos="zoom-out"
-          data-aos-duration="1500"
-        />
-        {% else %}
-        <img
-          src="{% static 'img/default.jpg' %}"
-          class="card-img-top img-fluid"
-          alt="Sin portada"
-          style="height: 200px; object-fit: contain"
-        />
         {% endif %}
+
+        <div class="position-relative">
+          {% if b.portada %}
+          <img
+            src="{{ b.portada.url }}"
+            class="card-img img-fluid"
+            alt="{{ b.titulo }}"
+            style="height: 200px; object-fit: contain"
+          />
+          {% else %}
+          <img
+            src="{% static 'img/default.jpg' %}"
+            class="card-img-top img-fluid"
+            alt="Sin portada"
+            style="height: 200px; object-fit: contain"
+          />
+          {% endif %}
+
+          <div
+            class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 text-white d-flex align-items-center justify-content-center text-center p-3 opacity-0"
+            style="transition: opacity 0.4s; pointer-events: none"
+          >
+            <p class="mb-0 small">{{ b.detalle }}</p>
+          </div>
+        </div>
+
         <div class="card-body">
           <h4 class="card-title text-center text-uppercase text-success mb-3">
             {{ b.titulo }}
@@ -176,10 +207,12 @@ Blog-Tienda {% endblock %} {% block content %}
               </h3>
               <hr />
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
-                dolor asperiores molestias facere, esse, aspernatur dicta
-                nesciunt illo ullam nostrum veritatis nobis nisi odio iste natus
-                voluptates. Aliquid, totam voluptates?
+                Somos una librería ubicada en Medellín, dedicada a compartir el
+                amor por la lectura y el conocimiento. Ofrecemos una amplia
+                selección de libros de distintos géneros, desde literatura
+                clásica hasta las últimas novedades. Nuestro propósito es crear
+                un espacio donde cada lector encuentre inspiración, aprendizaje
+                y nuevas historias por descubrir.
               </p>
             </div>
           </div>
