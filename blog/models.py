@@ -19,6 +19,7 @@ class Blogs(models.Model):
     titulo = models.CharField(max_length=50)
     portada = models.ImageField(upload_to='media/', null=True, blank=True)
     autor = models.CharField(max_length=150)
+    detalle = models.TextField(null=True,blank=True)
     precio = models.DecimalField(decimal_places=2, max_digits=10, null=True, blank=True)
     fecha = models.DateTimeField(auto_now_add=True)
     disponible = models.BooleanField(default=True)

@@ -86,6 +86,8 @@ def vendeConNosotros(request):
         titulo = request.POST.get('titulo')
         portada = request.FILES.get('portada')
         autor = request.POST.get('autor')
+        detalle = request.POST.get('detalle')
+        
         precio = request.POST.get('precio')
 
         vendedor, creado = Vendedores.objects.get_or_create(
@@ -101,6 +103,7 @@ def vendeConNosotros(request):
             titulo=titulo,
             portada=portada,
             autor=autor,
+            detalle=detalle,
             precio=precio,
             vendedor=vendedor
         )
