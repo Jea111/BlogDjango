@@ -1,6 +1,23 @@
 {% extends 'layout/navbar.html' %} {% load static %} {% block title %}Registrar
 Blog{% endblock %} {% block content %}
 <body class="bg-light">
+  {% if mensaje %}
+  <div
+    class="alert alert-info alert-dismissible fade show shadow-sm text-center"
+    role="alert"
+  >
+    <i class="bi bi-info-circle"></i> {{ mensaje }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endif %}
+
+  <br />
+
   <div class="container mt-5 mb-5">
     <div class="card shadow-lg border-0">
       <div class="card-header bg-primary text-white text-center">
@@ -98,7 +115,7 @@ Blog{% endblock %} {% block content %}
           </div>
           <div class="col-md-6">
             <label class="form-label">Portada</label>
-            <input type="file" class="form-control" name="portada" />
+            <input type="file" class="form-control" name="portada" required />
           </div>
 
           <div class="col-12 text-center mt-4">

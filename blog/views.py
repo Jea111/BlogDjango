@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from decimal import Decimal, InvalidOperation
 from .models import Blogs,FormUser,Ventas,Vendedores
 from reseñas.models import ReseñaTienda
 from reseñas.views import reseñas_tienda
@@ -31,7 +32,6 @@ def pedidosUser(request):
             import json
             productos = json.loads(carrito)
             # Calcular totales y crear una entrada de venta por cada producto
-            from decimal import Decimal, InvalidOperation
 
             for item in productos:
                 try:
@@ -77,6 +77,14 @@ def pedidosUser(request):
 
 def vendeConNosotros(request):
     """ formulario para que los vendedores agreguen blogs """
+    
+    all_blogs = Blogs.objects.all()
+    reseñas = ReseñaTienda.objects.all().order_by('-created_at')
+    
+    
+    mensaje = 'Si eres vendedor puedes ingresar al admin con tus credenciales para gestionar las ventas de tus productos aliados'
+    
+    
     if request.method == 'POST':
         nombre_vendedor = request.POST.get('nombre_vendedor')
         email_vendedor = request.POST.get('email_vendedor')
@@ -109,12 +117,19 @@ def vendeConNosotros(request):
         )
 
         if creado:
-            return redirect('index')
+            return redirect(index, {
+        'blogs_all': all_blogs,
+        'reseñas': reseñas
+    })
+
         else:
-            return render(request,'index.html')
 
+            return render(request,'index.html',{
+        'blogs_all': all_blogs,
+        'reseñas': reseñas
+    })
 
-    return render(request, 'blogs.html')
+    return render(request, 'blogs.html',{'mensaje':mensaje})
 
 def Reseñas(request):
     res = reseñas_tienda()
