@@ -43,7 +43,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto text-center">
             <li class="nav-item">
-              <a class="nav-link" href="#inicio">Inicio</a>
+              <a class="nav-link" href="{% url 'index' %}#inicio">Inicio </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'agregarBlogs' %}">
@@ -51,7 +51,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-danger fw-semibold" href="#abouh">
+              <a class="nav-link" href="{% url 'index' %}#about">
                 <i class="bi bi-info-circle me-1"></i>Sobre nosotros
               </a>
             </li>
