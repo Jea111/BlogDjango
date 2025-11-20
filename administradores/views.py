@@ -147,7 +147,7 @@ def editar_blog_vendedor(request, id):
         blog_editar.titulo = titulo
         blog_editar.autor = autor
         blog_editar.precio = precio
-        if portada:  # Solo cambiar la imagen si se sube una nueva ya que lo deje opcional
+        if portada:  # Solo cambiar la imagen si se sube una nueva 
             blog_editar.portada = portada
         
         blog_editar.save()
