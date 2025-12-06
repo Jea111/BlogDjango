@@ -33,13 +33,18 @@ Usuario{% endblock %} {% block content %}
               <label class="form-label text-success fw-semibold"
                 >Metodo pago</label
               >
-              <input
+              <!-- <input
                 type="text"
                 class="form-control"
                 name="metodo_pago"
                 placeholder="(Nequi/Bancolombia/efectivo)"
                 required
-              />
+              /> -->
+              <select name="metodo_pago" class="form-select">
+                <option value="Nequi">Nequi</option>
+                <option value="Bancolombia">Bancolombia</option>
+                <option value="Efectivo">Efectivo</option>
+              </select>
             </div>
 
             <div class="text-center">
