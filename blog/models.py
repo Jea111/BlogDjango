@@ -5,6 +5,7 @@ class Vendedores(models.Model):
     email_vendedor = models.EmailField(max_length=254, unique=True)
     telefono_vendedor = models.CharField(max_length=20)
     password_vendedor = models.CharField(max_length=200,null=True,blank=True)
+    estado = models.BooleanField(default=False,null=True,blank=True)
     fecha_registro = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -22,8 +22,8 @@ class ItemVentas(admin.ModelAdmin):
     list_filter = ['usuario','producto','fecha_venta']
     search_fields = ['usuario','producto','fecha_venta']
 class ItemVendedores(admin.ModelAdmin):
-    fields = ['nombre_vendedor', 'email_vendedor', 'telefono_vendedor','password_vendedor']
-    list_display = ['nombre_vendedor', 'email_vendedor', 'telefono_vendedor', 'fecha_registro']
+    fields = ['nombre_vendedor', 'email_vendedor', 'telefono_vendedor','password_vendedor','estado']
+    list_display = ['nombre_vendedor', 'email_vendedor', 'telefono_vendedor','estado', 'fecha_registro']
     list_filter = ['fecha_registro']
     search_fields = ['nombre_vendedor']
     ordering = ['-fecha_registro']  

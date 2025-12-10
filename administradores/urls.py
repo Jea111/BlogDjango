@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import login, Ventas_panel_Admin,eliminar_blog_vendedor,editar_blog_vendedor,eliminar_vendedor_admin
+from .views import login, Ventas_panel_Admin,eliminar_blog_vendedor,editar_blog_vendedor,eliminar_vendedor_admin,editar_vendedor
 
 urlpatterns = [
     path('login/', login, name='login'),
@@ -8,5 +8,6 @@ urlpatterns = [
     path('eliminar_blog/<int:id>/', eliminar_blog_vendedor, name='eliminar_blog'),
     path('editar_blog/<int:id>/', editar_blog_vendedor, name='editar_blog'),
     path('eliminar_vendedor/<int:id>/', eliminar_vendedor_admin, name='eliminar_vendedor'),
+    path('editar_vendedor/<int:id>/', editar_vendedor, name='editar_vendedor'),
 
 ]

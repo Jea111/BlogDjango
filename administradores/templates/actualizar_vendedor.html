@@ -1,0 +1,63 @@
+{% extends "layout/base-panel.html" %} {% block title %}Editar Blog-panel
+Admin{% endblock %} {% block content %}
+
+<div class="card-body p-4">
+  <form method="POST" enctype="multipart/form-data" class="row g-3">
+    {% csrf_token %}
+
+    <h4 class="text-primary mt-3">Datos del Vendedor</h4>
+    <div class="col-md-4">
+      <label class="form-label">Nombre</label>
+      <input
+        type="text"
+        class="form-control"
+        name="nombre_vendedor"
+        placeholder="Tu nombre"
+        required
+      />
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email_vendedor"
+        placeholder="correo@ejemplo.com"
+        required
+      />
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Teléfono</label>
+      <input
+        type="number"
+        class="form-control"
+        name="telefono_vendedor"
+        placeholder="+57 314253662"
+        required
+      />
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">password</label>
+      <input
+        type="password"
+        class="form-control"
+        name="password_vendedor"
+        required
+      />
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Estado</label>
+      <select name="estado">
+        <option value="true">True</option>
+        <option value="false">False</option>
+      </select>
+    </div>
+    <div class="col-12 text-center mt-4">
+      <button type="submit" class="btn btn-success px-4 py-2">
+        <i class="bi bi-upload"></i> actualizar vendedor
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
