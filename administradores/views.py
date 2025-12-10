@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from blog.models import Ventas, Vendedores, FormUser, Blogs
 from .models import PanelAdminAdd
-
+from reseñas.models import ReseñaBlog
 
 def login(request):
     """Validación de administrador y vendedor"""
@@ -35,8 +35,12 @@ def login(request):
             elif vendedor and admin.correo_admin == vendedor.email_vendedor:
                 if admin.password_admin == vendedor.password_vendedor:
                     # Obtener los blogs y ventas del vendedor
+                    blog = get_object_or_404(Blogs, id=id)
+                    
                     blog_vendedor = Blogs.objects.filter(vendedor__email_vendedor=correo_admin)
                     ventas_vendedor = Ventas.objects.filter(producto__vendedor__email_vendedor=correo_admin)
+                    reseñas_vendedor = ReseñaBlog.objects.all()
+                    
 
                     #  Inyectar vendedor como usuario 
                     request.user = vendedor
@@ -45,6 +49,7 @@ def login(request):
                     context = {
                         'vendedor_blog': blog_vendedor,
                         'ventas_vendedor': ventas_vendedor,
+                        
                     }
                     return render(request, 'panel_vendedores.html', context)
                 else:
@@ -85,14 +90,18 @@ def Ventas_panel_Admin(request):
     ventas_admin = Ventas.objects.all()
     vendedores_admin = Vendedores.objects.all()
     formuser_admin = FormUser.objects.all()
+    
+    
 
     context = {
         'ventas_admin': ventas_admin,
         'vendedores_admin': vendedores_admin,
         'formuser_admin': formuser_admin,
+        
     }
 
     return render(request, 'panel.html', context)
+
 
 
 def eliminar_blog_vendedor(request, id):
@@ -170,3 +179,29 @@ def eliminar_vendedor_admin(request, id):
         return redirect('ventas') 
     
     return render(request, 'login.html')
+
+def editar_vendedor(request,id):
+    vendedor_editar = get_object_or_404(Vendedores, id=id)
+    if request.method =='POST':
+        nombre = request.POST.get('nombre_vendedor')
+        correo = request.POST.get('email_vendedor')
+        telefono = request.POST.get('telefono_vendedor')
+        contrasenia = request.POST.get('password_vendedor')
+        estatus = True if request.POST.get('estado') == 'true' else False
+
+        
+        vendedor_editar.nombre_vendedor =nombre
+        vendedor_editar.email_vendedor =correo
+        vendedor_editar.telefono_vendedor =telefono
+        vendedor_editar.password_vendedor =contrasenia
+        vendedor_editar.estado =estatus
+        vendedor_editar.save()
+        
+        messages.success(request, 'vendedor actualizado exitosamente.')
+        return redirect('panel_vendedores')
+    context = {
+        'vende': vendedor_editar
+    }
+    return render(request, 'actualizar_vendedor.html', context)
+    
+    

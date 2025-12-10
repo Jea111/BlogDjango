@@ -1,7 +1,7 @@
 # Sistema de Gestión de Blog y tienda
 
 ### Descripción del Proyecto
-Este proyecto académico implementa una plataforma web desarrollada con Django que combina funcionalidades de blog y tienda. El sistema permite la gestión de contenido digital (blogs/artículos) con características de comercio electrónico, sistema de reseñas y carrito de compras.
+Este proyecto académico implementa una plataforma web desarrollada con Django que combina funcionalidades de tienda. El sistema permite la gestión de contenido digital (blogs) con características de comercio electrónico, sistema de reseñas y carrito de compras.
 
 ### Estado Actual del Proyecto
 1. **Interfaz de Usuario**
@@ -28,8 +28,8 @@ Este proyecto académico implementa una plataforma web desarrollada con Django q
 - Python 3.10+
 - Django Framework
 - Dependencias adicionales:
-  - Pillow (procesamiento de imágenes)
-  - mysqlclient/para MySQL
+   - en el archivo requirements.txt(Estn las dependencias necesitadas)
+   - mysqlclient/para MySQL
 
 1) Crear y activar entorno virtual
 
@@ -63,12 +63,12 @@ python manage.py runserver
 
 ### Funcionalidades 
 1. **Gestión de Contenido**
-   - Catálogo de blogs/artículos
-   - Sistema de búsqueda por título
+   - Catálogo de blogs
    - Carga de imágenes de portada
 
 2. **Sistema de Usuarios**
    - Panel de administración 
+   - Panel de vendedores
    - Autenticación de administradores
    - Gestión de vendedores
 
@@ -81,13 +81,7 @@ python manage.py runserver
 - `/` - Página principal y catálogo
 - `/login/` - Acceso administrativo
 - `/ventas/` - Panel de control de ventas (admin)
-- `/agregarBlogs/` - Gestión de vende con nosotros
-- `/pedidos/` - Datos de pedidos de usuario(se crea la venta )
-- `/blog_comentado/<int:id>//` - Datos de reseñas por blog y se crea la reseña
-
-### A tener en cuenta
-- Verificar compatibilidad de versiones en requirements.txt
-- Revisar periódicamente actualizaciones de seguridad
-- Considerar implementar pruebas automatizadas
-- Documentar cambios significativos en el código
+- `/agregarBlogs/` - Gestión de vende con nosotros(aliados)
+- `/pedidos/` - Datos de pedidos de usuario( y se crea la venta con datos del comprador )
+- `/blog_comentado/<int:id>//` - Datos de reseñas por blog y se crea la reseña con un comprador asignado(sin reseñas anonimas)
 

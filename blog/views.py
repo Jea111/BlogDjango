@@ -8,9 +8,13 @@ def index(request):
     """muestra todos los blogs y reseñas en la página principal"""
     all_blogs = Blogs.objects.all()
     reseñas = ReseñaTienda.objects.all().order_by('-created_at')
+    vendedoresView = Vendedores.objects.all
+    
     return render(request, 'index.html', {
         'blogs_all': all_blogs,
-        'reseñas': reseñas
+        'reseñas': reseñas,
+        'vendedor':vendedoresView
+        
     })
 
 
