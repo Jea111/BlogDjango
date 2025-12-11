@@ -68,10 +68,11 @@ def login(request):
                 #  Inyectar vendedor como usuario 
                 request.user = vendedor
                 request.session['vendedor_id'] = vendedor.id
+                
 
                 context = {
                     'vendedor_blog': blog_vendedor,
-                    'ventas_vendedor': ventas_vendedor
+                    'ventas_vendedor': ventas_vendedor,
                 }
                 return render(request, 'panel_vendedores.html', context)
             else:
@@ -205,3 +206,22 @@ def editar_vendedor(request,id):
     return render(request, 'actualizar_vendedor.html', context)
     
     
+    
+def ventasFiltradasView(request):
+    """Filtra ventas por nombre del comprador y las muestra en otra plantilla."""
+
+    if request.method == "POST":
+        busqueda = request.POST.get("busqueda", "")  # nombre del input o vacio
+        
+        # Filtrar por nombre del comprador (FormUser.nombre)
+        ventas_filtradas = Ventas.objects.filter(
+            usuario__nombre__icontains=busqueda
+        )
+        
+        context = {
+            "ventas_filtradas": ventas_filtradas,
+            "search_value": busqueda
+        }
+        return render(request, "ventas_filtradas.html", context)
+
+    return render(request, "ventas_filtradas.html", {"ventas_filtradas": []})
