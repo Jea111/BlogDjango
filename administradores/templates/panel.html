@@ -26,6 +26,17 @@ Librería{% endblock %} {% block content %}
   <br />
 
   <!-- Ventas -->
+  <form action="{% url 'ventas_filtradas' %}" method="post">
+    {% csrf_token %}
+    <input
+      type="search"
+      name="busqueda"
+      placeholder="Nombre del comprador"
+      required
+    />
+    <button type="submit" class="btn btn-primary">Buscar</button>
+  </form>
+
   <div class="mb-5">
     <div class="d-flex align-items-center mb-3">
       <i class="bi bi-cart4 fs-4 text-primary me-2"></i>

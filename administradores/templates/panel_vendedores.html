@@ -163,9 +163,21 @@
   <h3 class="border-start border-4 border-primary ps-2 text-dark mt-5 mb-4" id="ventas">
     Ventas realizadas
   </h3>
+
+
+  <form action="{% url 'ventas_filtradas' %}" method="post">
+      {% csrf_token %}
+      <input type="search" name="busqueda" placeholder="Nombre del comprador" required>
+      <button type="submit" class="btn btn-primary">Buscar</button>
+  </form>
   
   <div class="row row-cols-1 row-cols-md-2 g-3">
     {% for v in ventas_vendedor %}
+
+
+
+
+
     <div class="col">
       <div class="card shadow-sm border-0 h-100" id="ventas">
         <div class="card-body">
@@ -183,7 +195,8 @@
             </strong>
             
             <strong class="text-primary">{{ v.producto.titulo }}</strong> por
-            <span class="text-success fw-semibold">{{ v.total }}</span>
+            <span class="text-success fw-semibold">{{ v.total }}</span><br>
+            <strong>Fecha Venta: <span class="text-secondary fw-semibold"> {{ v.fecha_venta }}</span></strong>
           </p>
         </div>
       </div>
