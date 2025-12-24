@@ -25,17 +25,24 @@ Librería{% endblock %} {% block content %}
 
   <br />
 
-  <!-- Ventas -->
-  <form action="{% url 'ventas_filtradas' %}" method="post">
+  <form method="post" action="{% url 'ventas_filtradas' %}">
     {% csrf_token %}
     <input
-      type="search"
+      type="text"
       name="busqueda"
-      placeholder="Nombre del comprador"
-      required
+      placeholder="Buscar tarea con tu nombre"
+      class="form-control w-25 mb-2"
     />
-    <button type="submit" class="btn btn-primary">Buscar</button>
+    <button type="submit" class="btn btn-primary mb-2">Buscar</button>
   </form>
+  <div>
+    {% for v in ventas_encontradas %}
+    <h4>Usuario: {{v.usuario.nombre}}</h4>
+    <h6>Compró {{v.producto.titulo}}</h6>
+    <span>Por {{v.producto.precio}}</span>
+
+    {% endfor %}
+  </div>
 
   <div class="mb-5">
     <div class="d-flex align-items-center mb-3">
@@ -139,6 +146,7 @@ Librería{% endblock %} {% block content %}
             <p class="card-text text-muted small mb-1">
               <i class="bi bi-envelope"></i> {{ vendedor.email_vendedor }}
             </p>
+            <p class="visually-hidden">ID VENDEDOR: {{vendedor.id}}</p>
             <p class="card-text text-muted small mb-0">
               <i class="bi bi-telephone"></i> {{ vendedor.telefono_vendedor }}
             </p>

@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'blog_proyect.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': env.str('BD_NAME'),
         'PORT':env.int('BD_PORT'),
         'USER':env.str('BD_USER'),

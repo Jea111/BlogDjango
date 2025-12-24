@@ -12,6 +12,7 @@ Admin{% endblock %} {% block content %}
         type="text"
         class="form-control"
         name="nombre_vendedor"
+        value="{{blog.vendedor.nombre_vendedor}}"
         placeholder="Tu nombre"
         required
       />
@@ -22,6 +23,7 @@ Admin{% endblock %} {% block content %}
         type="email"
         class="form-control"
         name="email_vendedor"
+        value="{{blog.vendedor.email_vendedor}}"
         placeholder="correo@ejemplo.com"
         required
       />
@@ -33,6 +35,7 @@ Admin{% endblock %} {% block content %}
         class="form-control"
         name="telefono_vendedor"
         placeholder="+57 314253662"
+        value="{{blog.vendedor.telefono_vendedor}}"
         required
       />
     </div>
