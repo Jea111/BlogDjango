@@ -45,7 +45,7 @@ def reseñas_tienda(request):
             )
 
         if not usuario:
-            reseñas = ReseñaTienda.objects.all().order_by('-created_at')
+            reseñas = ReseñaTienda.objects.all().order_by('-created_at')[:5]
             mensaje = 'Debe indicar su nombre para dejar una reseña de la tienda.'
             return render(request, 'store_reseñas.html', {'mensaje': mensaje, 'reseñas': reseñas})
 
@@ -60,8 +60,8 @@ def reseñas_tienda(request):
             calificacion_tienda=cal
         )
 
-        reseñas = ReseñaTienda.objects.all().order_by('-created_at')
+        reseñas = ReseñaTienda.objects.all().order_by('-created_at')[:5]
         mensaje = 'Reseña de la tienda creada correctamente.'
         return render(request, 'store_reseñas.html', {'mensaje': mensaje, 'reseñas': reseñas})
-    reseñas = ReseñaTienda.objects.all().order_by('-created_at')
+    reseñas = ReseñaTienda.objects.all().order_by('-created_at')[:5]
     return render(request, 'store_reseñas.html', {'reseñas': reseñas})

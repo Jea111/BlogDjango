@@ -209,22 +209,7 @@
 
 
 
-<!-- Reseñas de cada blog em panel de vendedores(solo reseñas de sus blogs) -->
-  <section class="align-self-center">
-    {% for r in reseña  %}
-    <div class="card">
 
-      <h4>lugar de reseñas</h4>
-      <h4>{{r.nombre_usuario}}</h4>
-      <span>{{r.comentario}}</span>
-      <p>{{r.calificacion}}</p>
-      <p>{{r.blog_comentado}}</p>
-    </div>
-    {% empty %}
-    <p class="text-muted">No tienes reseñas registrados.</p>
-      
-    {% endfor %}      
-  </section>
 
 
 

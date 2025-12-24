@@ -6,16 +6,16 @@ from reseñas.models import ReseñaTienda
 from reseñas.views import reseñas_tienda
 def index(request):
     """muestra todos los blogs y reseñas en la página principal"""
-    all_blogs = Blogs.objects.all()
+    all_blogs = Blogs.objects.all().order_by('fecha')
     reseñas = ReseñaTienda.objects.all().order_by('-created_at')
-    vendedoresView = Vendedores.objects.all
-    
-    return render(request, 'index.html', {
+    vendedoresView = Vendedores.objects.all()
+    context = {
         'blogs_all': all_blogs,
         'reseñas': reseñas,
-        'vendedor':vendedoresView
-        
-    })
+        'vendedor':vendedoresView}
+    
+    return render(request, 'index.html',context)
+    # return redirect('index')
 
 
 
@@ -27,9 +27,13 @@ def pedidosUser(request):
         met_p = request.POST.get('metodo_pago')
         carrito = request.POST.get('carrito')
 
-        usuario = FormUser.objects.create(
-            nombre=nomb, direccion=direc, metodo_pago=met_p
-        )
+        usuario, creado = FormUser.objects.get_or_create(
+        nombre=nomb,
+        defaults={
+            'direccion': direc,
+            'metodo_pago': met_p
+        }
+    )
 
         # Crear las ventas 
         if carrito:
@@ -139,3 +143,5 @@ def Reseñas(request):
     res = reseñas_tienda()
     
     return render (request,'index.html',res)
+
+

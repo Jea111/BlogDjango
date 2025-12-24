@@ -11,4 +11,6 @@ urlpatterns = [
     path('editar_vendedor/<int:id>/', editar_vendedor, name='editar_vendedor'),
     path('ventas_filtradas',ventasFiltradasView,name='ventas_filtradas'),
 
+    
+
 ]

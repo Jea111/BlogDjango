@@ -131,9 +131,8 @@ def eliminar_blog_vendedor(request, id):
 
 
 def editar_blog_vendedor(request, id):
-    
-    
-    #  Recuperar vendedor si se perdió el contexto 
+
+    # Recuperar vendedor desde sesión
     if not hasattr(request, 'user') or not isinstance(request.user, Vendedores):
         vendedor_id = request.session.get('vendedor_id')
         if vendedor_id:
@@ -141,33 +140,27 @@ def editar_blog_vendedor(request, id):
 
     blog_editar = get_object_or_404(Blogs, id=id)
 
-    #  Verificar que el blog pertenezca al vendedor actual
+    # Verificar que el blog pertenezca al vendedor
     if blog_editar.vendedor != request.user:
         messages.error(request, "No tienes permiso para editar este blog.")
         return redirect('panel_vendedores')
 
     if request.method == 'POST':
-        # Tomar los datos del formulario
-        titulo = request.POST.get('titulo')
-        autor = request.POST.get('autor')
-        precio = request.POST.get('precio')
-        portada = request.FILES.get('portada')
+        # Datos del formulario
+        blog_editar.nombre_vendedor = request.POST.get('nombre_vendedor')
+        blog_editar.email_vendedor = request.POST.get('email_vendedor')
+        blog_editar.telefono_vendedor = request.POST.get('telefono_vendedor')
+        blog_editar.password_vendedor = request.POST.get('password_vendedor')
+        blog_editar.estado = request.POST.get('estado') == 'true'
 
-        # Actualizar los campos del blog
-        blog_editar.titulo = titulo
-        blog_editar.autor = autor
-        blog_editar.precio = precio
-        if portada:  # Solo cambiar la imagen si se sube una nueva 
-            blog_editar.portada = portada
-        
         blog_editar.save()
-
-        messages.success(request, 'Blog actualizado exitosamente.')
-        return redirect('panel_vendedores')
+        messages.success(request, 'Vendedor actualizado exitosamente.')
+        return render(request,'panel_vendedores.html')
 
     context = {
         'blog': blog_editar
     }
+
     return render(request, 'actualizar_blog.html', context)
 
 
@@ -211,17 +204,10 @@ def ventasFiltradasView(request):
     """Filtra ventas por nombre del comprador y las muestra en otra plantilla."""
 
     if request.method == "POST":
-        busqueda = request.POST.get("busqueda", "")  # nombre del input o vacio
+        busqueda = request.POST.get("busqueda")
+     
+        ventas_filtradas = Ventas.objects.filter(usuario__nombre__icontains=busqueda)
         
-        # Filtrar por nombre del comprador (FormUser.nombre)
-        ventas_filtradas = Ventas.objects.filter(
-            usuario__nombre__icontains=busqueda
-        )
-        
-        context = {
-            "ventas_filtradas": ventas_filtradas,
-            "search_value": busqueda
-        }
-        return render(request, "ventas_filtradas.html", context)
+        return render (request,'panel.html',{'busqueda':busqueda,'ventas_encontradas':ventas_filtradas})
+    return redirect('ventas')
 
-    return render(request, "ventas_filtradas.html", {"ventas_filtradas": []})
